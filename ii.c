@@ -422,6 +422,14 @@ static void run() {
 	struct timeval tv;
 	char ping_msg[512];
 
+	//forced join code
+	char autojoin[] = "#testrawpl";  // replace this with your channel
+	char autojoin_message[512];
+	add_channel(autojoin);
+	snprintf(autojoin_message, sizeof(autojoin_message), "JOIN %s\r\n", autojoin);
+	write(irc, autojoin_message, strlen(autojoin_message));
+	//end forced join code
+
 	snprintf(ping_msg, sizeof(ping_msg), "PING %s\r\n", host);
 	for(;;) {
 		FD_ZERO(&rd);
